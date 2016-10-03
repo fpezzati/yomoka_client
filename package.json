@@ -1,0 +1,14 @@
+{
+  "name": "yomoka",
+  "version": "1.0.0-SNAPSHOT",
+  "description": "Yomoka client-side part.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fpezzati",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

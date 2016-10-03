@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="yo-offer">
+    <style>
+
+    </style>
+    <template>
+      <form>
+        <fieldset>
+          <label for="description">About</label><input id="description" type="text" value={{offer.description}}></input>
+          <label for="price">price</label><input id="price" type="number" value={{offer.price}}></input>
+          <label for="expires">lasts until</label><input id="expires" type="datetime" value={{offer.expires}}></input>
+          <label for="latitude">LAT</label><input id="latitude" type="number" value={{offer.latitude}}></input>
+          <label for="longitude">LON</label><input id="longitude" type="number" value={{offer.longitude}}></input>
+        </fieldset>
+        <button on-tap="submitOffer">Send</button>
+      </form>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: "yo-offer",
+        properties: {
+          offer: {
+            type: Object,
+            notify: true
+          }
+        },
+        submitOffer: function() {
+          alert("submit");
+        }
+    });
+</script>

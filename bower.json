@@ -1,0 +1,20 @@
+{
+  "name": "yomoka",
+  "description": "Yomoka client-side part.",
+  "main": "app.js",
+  "authors": [
+    "fpezzati"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.7.0"
+  }
+}

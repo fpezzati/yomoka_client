@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="yo-offer-set">
+    <style>
+
+    </style>
+    <template>
+      <div class="table">
+        <div class="tablehead"></div>
+        <template repeat="{{offer in offerSet}}">
+          <div class="row">
+            JSON.stringify(offer);
+          </div>
+        </template>
+      </div>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: "yo-offer-set",
+        properties: {
+          offerSet: {
+            type: Array,
+            notify: true
+          }
+        },
+        loadOfferSet: function() {
+
+        },
+        submitOffer: function() {
+          alert("submit");
+        },
+        ready: function() {
+          loadOfferSet();
+        }
+    });
+</script>
