@@ -1,12 +1,10 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <dom-module id="yo-offer">
     <style>
 
     </style>
     <template>
+      <iron-ajax id="offerRead" handle-as="json" on-error="_offerReadError" on-response="_offerReadResp"></iron-ajax>
       <form>
-        <iron-ajax id="offerRead" handle-as="json" on-error="_offerReadError" on-response="_offerReadResp"></iron-ajax>
         <fieldset>
           <label for="description">About</label><input id="description" type="text" value={{offer.description}}></input>
           <label for="price">price</label><input id="price" type="number" value={{offer.price}}></input>
