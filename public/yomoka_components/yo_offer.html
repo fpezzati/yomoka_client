@@ -3,7 +3,10 @@
 
     </style>
     <template>
+      <iron-ajax id="offerCreate" method="PUT" handle-as="json" on-error="_offerCreateError" on-response="_offerCreateResp"></iron-ajax>
       <iron-ajax id="offerRead" handle-as="json" on-error="_offerReadError" on-response="_offerReadResp"></iron-ajax>
+      <iron-ajax id="offerUpdate" method="POST" handle-as="json" on-error="_offerUpdateError" on-response="_offerUpdateResp"></iron-ajax>
+      <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerDeleteError" on-response="_offerDeleteResp"></iron-ajax>
       <form>
         <fieldset>
           <label for="description">About</label><input id="description" type="text" value={{offer.description}}></input>
@@ -12,7 +15,9 @@
           <label for="latitude">LAT</label><input id="latitude" type="number" value={{offer.latitude}}></input>
           <label for="longitude">LON</label><input id="longitude" type="number" value={{offer.longitude}}></input>
         </fieldset>
-        <button on-tap="submitOffer">Send</button>
+        <button on-tap="offerReset">New</button>
+        <button on-tap="offerSubmit">Send</button>
+        <button on-tap="deleteOffer">Delete</button>
       </form>
     </template>
 </dom-module>
@@ -22,15 +27,46 @@
         properties: {
           offer: {
             type: Object,
-            notify: true
+            notify: true,
+            value: {}
+          },
+          offerCreateUrl: {
+            type: String,
+            value: 'srv/offer'
           },
           offerReadUrl: {
             type: String,
-            value: 'srv/offer/read'
+            value: 'srv/offer'
+          },
+          offerUpdateUrl: {
+            type: String,
+            value: 'srv/offer'
+          },
+          offerDeleteUrl: {
+            type: String,
+            value: 'srv/offer'
           }
         },
-        ready: function() {
-          this.offerRead(1);
+        offerReset: function() {
+          this.set('offer', {});
+        },
+        offerSubmit: function() {
+          if(this.offer._id === undefined || this.offer.id == "") {
+            this.offerCreate();
+          } else {
+            this.offerUpdate();
+          }
+        },
+        offerCreate: function() {
+          this.$.offerCreate.url = this.offerCreateUrl;
+          this.$.offerCreate.body = JSON.stringify(this.offer);
+          this.$.offerCreate.generateRequest();
+        },
+        _offerCreateResp: function(data) {
+          this.offer = data.detail.response;
+        },
+        _offerCreateError: function(msg) {
+          alert(msg);
         },
         offerRead: function(id) {
           this.$.offerRead.url = this.offerReadUrl + '/' + id;
@@ -42,8 +78,27 @@
         _offerReadError: function(msg) {
           alert(msg);
         },
-        offerSubmit: function() {
-          alert("submit");
+        offerUpdate: function() {
+          this.$.offerUpdate.url = this.offerUpdateUrl;
+          this.$.offerUpdate.body = JSON.stringify(this.offer);
+          this.$.offerUpdate.generateRequest();
+        },
+        _offerUpdateResp: function(data) {
+          this.offer = data.detail.response;
+        },
+        _offerUpdateError: function(msg) {
+          alert(msg);
+        },
+        offerDelete: function() {
+          this.$.offerDelete.url = this.offerDeleteUrl;
+          this.$.offerDelete.body = this.offer;
+          this.$.offerDelete.generateRequest();
+        },
+        _offerDeleteResp: function(data) {
+          this.offer = data.detail.response;
+        },
+        _offerDeleteError: function(msg) {
+          alert(msg);
         }
     });
 </script>
