@@ -3,7 +3,7 @@
 
     </style>
     <template>
-      <iron-ajax id="offerCreate" method="PUT" handle-as="json" on-error="_offerCreateError" on-response="_offerCreateResp"></iron-ajax>
+      <iron-ajax id="offerCreate" method="PUT" handle-as="json" content-type="application/json" on-error="_offerCreateError" on-response="_offerCreateResp"></iron-ajax>
       <iron-ajax id="offerRead" handle-as="json" on-error="_offerReadError" on-response="_offerReadResp"></iron-ajax>
       <iron-ajax id="offerUpdate" method="POST" handle-as="json" on-error="_offerUpdateError" on-response="_offerUpdateResp"></iron-ajax>
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerDeleteError" on-response="_offerDeleteResp"></iron-ajax>
