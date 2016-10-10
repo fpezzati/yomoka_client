@@ -9,9 +9,10 @@
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerDeleteError" on-response="_offerDeleteResp"></iron-ajax>
       <form>
         <fieldset>
+          <input id="_id" type="hidden" value={{offer._id}}></input>
           <label for="description">About</label><input id="description" type="text" value={{offer.description}}></input>
           <label for="price">price</label><input id="price" type="number" value={{offer.price}}></input>
-          <label for="expires">lasts until</label><input id="expires" type="datetime" value={{offer.expires}}></input>
+          <label for="expires">lasts until</label><input id="expires" type="date" value={{offer.expires}}></input>
           <label for="latitude">LAT</label><input id="latitude" type="number" value={{offer.latitude}}></input>
           <label for="longitude">LON</label><input id="longitude" type="number" value={{offer.longitude}}></input>
         </fieldset>
