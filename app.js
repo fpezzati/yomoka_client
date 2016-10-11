@@ -25,8 +25,9 @@ app.put('/srv/offer', function(req, res) {
   newOffer._id = new Date().getMilliseconds();
   if(!(newOffer._id in database)) {
     database[newOffer._id] = newOffer;
+    res.send(JSON.stringify(newOffer));
   } else {
-    res.sent('{"description": "OFFER EXISTS"}');
+    res.send('{"description": "OFFER EXISTS"}');
   }
 });
 app.post('/srv/offer', function(req, res) {
