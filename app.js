@@ -20,7 +20,7 @@ app.get('/srv/offer/:id', function(req, res) {
   }
 });
 app.put('/srv/offer', function(req, res) {
-  console.log("create offer: "+req.body);
+  console.log("creating offer: "+JSON.stringify(req.body));
   var newOffer = req.body;
   newOffer._id = new Date().getMilliseconds();
   if(!(newOffer._id in database)) {

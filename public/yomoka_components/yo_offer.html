@@ -9,11 +9,11 @@
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerDeleteError" on-response="_offerDeleteResp"></iron-ajax>
       <form>
         <fieldset>
-          <input id="offerId" type="hidden" value="{{offer._id}}"></input>
-          <label for="description">About</label><input id="description" type="text" value="{{offer.description::input}}"></input>
-          <label for="price">price</label><input id="price" type="number" value="{{offer.price::input}}"></input>
-          <label for="expires">lasts until</label><input id="expires" type="date" value="{{offer.expires::input}}"></input>
-          <label for="latitude">LAT</label><input id="latitude" type="number" value="{{offer.latitude::input}}"></input>
+          <label for="offerId">Id</label><input id="offerId" type="text" value="{{offer._id::input}}"></input><br>
+          <label for="description">About</label><input id="description" type="text" value="{{offer.description::input}}"></input><br>
+          <label for="price">price</label><input id="price" type="number" value="{{offer.price::input}}"></input><br>
+          <label for="expires">lasts until</label><input id="expires" type="date" value="{{offer.expires::input}}"></input><br>
+          <label for="latitude">LAT</label><input id="latitude" type="number" value="{{offer.latitude::input}}"></input><br>
           <label for="longitude">LON</label><input id="longitude" type="number" value="{{offer.longitude::input}}"></input>
         </fieldset>
         <button on-tap="offerReset">New</button>
@@ -23,7 +23,6 @@
     </template>
 </dom-module>
 <script>
-  (function(){
     Polymer({
         is: "yo-offer",
         properties: {
@@ -66,6 +65,7 @@
         },
         _offerCreateResp: function(data) {
           this.offer = data.detail.response;
+          console.log(JSON.stringify(this.offer));
         },
         _offerCreateError: function(msg) {
           alert(msg);
@@ -103,5 +103,4 @@
           alert(msg);
         }
     });
-  })();
 </script>
