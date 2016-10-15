@@ -9,12 +9,12 @@
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerDeleteError" on-response="_offerDeleteResp"></iron-ajax>
       <form>
         <fieldset>
-          <input id="offerId" type="hidden" value="{{offer._id}}"></input>
-          <label for="description">About</label><input id="description" type="text" value="{{offer.description::input}}"></input>
-          <label for="price">price</label><input id="price" type="number" value="{{offer.price::input}}"></input>
-          <label for="expires">lasts until</label><input id="expires" type="date" value="{{offer.expires::input}}"></input>
-          <label for="latitude">LAT</label><input id="latitude" type="number" value="{{offer.latitude::input}}"></input>
-          <label for="longitude">LON</label><input id="longitude" type="number" value="{{offer.longitude::input}}"></input>
+          <input id="offerId" type="hidden" value="{{offer._id::value-changed}}"></input>
+          <label for="description">About</label><input id="description" type="text" value="{{offer.description::value-changed}}"></input>
+          <label for="price">price</label><input id="price" type="number" value="{{offer.price::value-changed}}"></input>
+          <label for="expires">lasts until</label><input id="expires" type="date" value="{{offer.expires::value-changed}}"></input>
+          <label for="latitude">LAT</label><input id="latitude" type="number" value="{{offer.latitude::value-changed}}"></input>
+          <label for="longitude">LON</label><input id="longitude" type="number" value="{{offer.longitude::value-changed}}"></input>
         </fieldset>
         <button on-tap="offerReset">New</button>
         <button on-tap="offerSubmit">Send</button>
