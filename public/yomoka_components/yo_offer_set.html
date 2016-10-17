@@ -4,13 +4,22 @@
 
     </style>
     <template>
+      <iron-ajax id="offerSetRead" handle-as="json" on-error="_offerError" on-response="_offerSetReadResp"></iron-ajax>
       <div class="table">
-        <div class="tablehead"></div>
-        <template repeat="{{offer in offerSet}}">
+        <div class="tablehead">
+          <div>Id</div><div>Description</div><div>Lat</div><div>Lon</div>
+        </div>
+        <template is="dom-repeat" items="[[offerSet]]">
           <div class="row">
-            JSON.stringify(offer);
+            <div>[[item._id]]</div><div>[[item.description]]</div>
           </div>
         </template>
+      </div>
+      <div>
+        <button on-tap="offerSetLoad">Load</button>
+      </div>
+      <div>
+        [[errormsg]]
       </div>
     </template>
 </dom-module>
@@ -21,16 +30,21 @@
           offerSet: {
             type: Array,
             notify: true
+          },
+          errormsg: {
+            type: String,
+            value: ''
           }
         },
-        loadOfferSet: function() {
-
+        offerSetLoad: function() {
+          this.$.offerSetRead.url = '/srv/offer/all';
+          this.$.offerSetRead.generateRequest();
         },
-        submitOffer: function() {
-          alert("submit");
+        _offerSetReadResp: function(data) {
+          this.offerSet = data.detail.response;
         },
-        ready: function() {
-          loadOfferSet();
+        _offerError: function(data) {
+          this.errormsg = data;
         }
     });
 </script>

@@ -7,7 +7,7 @@ var database = {};
 console.log("__dirname = "+__dirname);
 app.use(express.static(__dirname + '/public'));
 
-app.get('/srv/offer/read/all', function(req, res){
+app.get('/srv/offer/all', function(req, res){
   console.log("get offer set.");
   res.sendFile('./mock/offerset.js', {root: __dirname});
 });
