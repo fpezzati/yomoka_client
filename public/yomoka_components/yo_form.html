@@ -1,0 +1,42 @@
+<dom-module id="yo-form">
+  <style>
+  </style>
+  <template>
+    <iron-ajax id="formRead" handle-as="json" on-error="_formError" on-response="_formReadResp"></iron-ajax>
+    <div>
+      <fieldset>
+        <label for="description">About</label><input id="description" type="text" value="{{data.description::input}}"></input><br>
+      </fieldset>
+    </div>
+    <button on-tap="formLoad">Load</button>
+    <div>
+      [[errormsg]]
+    </div>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "yo-form",
+    properties: {
+      data: {
+        type: Object,
+        notify: true,
+        value: {}
+      },
+      errormsg: {
+        type: String,
+        value: ''
+      }
+    },
+    formLoad: function() {
+      this.$.formRead.url = '/srv/offer'+'/'+1;
+      this.$.formRead.generateRequest();
+    },
+    _formReadResp: function(msg) {
+      this.data = msg.detail.response;
+    },
+    _formError: function(msg) {
+      this.errormsg = msg.detail.response;
+    }
+  });
+</script>
