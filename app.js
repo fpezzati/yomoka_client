@@ -18,6 +18,10 @@ app.get('/srv/offer/:id', function(req, res) {
     res.send('{"description": "NONE"}');
   }
 });
+app.get('/srv/map/layer/:id', function(req, res) {
+  console.log('read layer: ' + req.params.id + ' bound to path ' + './mock/layer' + req.params.id + '.js');
+  res.sendFile('./mock/layer' + req.params.id + '.js', {root: __dirname});
+});
 app.put('/srv/offer', function(req, res) {
   console.log("creating offer: "+JSON.stringify(req.body));
   var newOffer = req.body;

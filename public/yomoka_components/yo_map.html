@@ -1,0 +1,67 @@
+<dom-module id="yo-map">
+  <style>
+  </style>
+  <template>
+    <iron-ajax id="mapRead" handle-as="json" on-error="_mapError" on-response="_mapRead"></iron-ajax>
+    <leaflet-map id="lmap" style$="width:[[width]]px;height:[[height]]px;" fit-to-markers></leaflet-map>
+    <div>
+      <button on-tap="featureSetLoad">Load</button>
+    </div>
+    <div>
+      [[errormsg]]
+    </div>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "yo-map",
+    properties: {
+      markerSet: {
+        type: Array,
+        notify: true,
+        value : []
+      },
+      url: {
+        type: String,
+        value: '/srv/offer/all'
+      },
+      controller: {
+        type: Object,
+        value: {}
+      },
+      height: {
+        value: 200
+      },
+      width: {
+        value: 200
+      }
+    },
+    featureSetLoad: function() {
+      this.$.mapRead.url = this.url;
+      this.$.mapRead.generateRequest();
+    },
+    _mapRead: function(data) {
+      this.controller.process(data, this);
+    },
+    _mapError: function(data) {
+      this.errormsg = data;
+    }
+//    offerSetLoad: function() {
+//      this.$.offerSetRead.url = $this.url;
+//      this.$.offerSetRead.generateRequest();
+//    },
+//    _offerSetReadResp: function(data) {
+//      for(i=0; i<data.detail.response.length; i++) {
+//        var marker = document.createElement('leaflet-marker');
+//        var markerDescription = document.createTextNode(data.detail.response[i].description);
+//        marker.setAttribute('latitude', data.detail.response[i].latitude);
+//        marker.setAttribute('longitude', data.detail.response[i].longitude);
+//        marker.appendChild(markerDescription);
+//        this.$.lmap.appendChild(marker);
+//      }
+//    },
+//    _offerError: function(data) {
+//      this.errormsg = data;
+//    }
+  });
+</script>

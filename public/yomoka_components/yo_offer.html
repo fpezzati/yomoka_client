@@ -1,23 +1,22 @@
 <dom-module id="yo-offer">
     <style>
-
     </style>
     <template>
       <iron-ajax id="offerCreate" method="PUT" handle-as="json" content-type="application/json" on-error="_offerError" on-response="_offerCreateResp"></iron-ajax>
       <iron-ajax id="offerRead" handle-as="json" on-error="_offerError" on-response="_offerReadResp"></iron-ajax>
       <iron-ajax id="offerUpdate" method="POST" handle-as="json" on-error="_offerError" on-response="_offerUpdateResp"></iron-ajax>
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerError" on-response="_offerDeleteResp"></iron-ajax>
-        <fieldset>
-          <label for="offerId">Id</label><input id="offerId" type="text" value="{{offer._id::input}}"></input><br>
-          <label for="description">About</label><input id="description" type="text" value="{{offer.description::input}}"></input><br>
-          <label for="price">price</label><input id="price" type="number" value="{{offer.price::input}}"></input><br>
-          <label for="expires">lasts until</label><input id="expires" type="date" value="{{offer.expires::input}}"></input><br>
-          <label for="latitude">LAT</label><input id="latitude" type="number" value="{{offer.latitude::input}}"></input><br>
-          <label for="longitude">LON</label><input id="longitude" type="number" value="{{offer.longitude::input}}"></input>
-        </fieldset>
-        <button on-tap="offerReset">New</button>
-        <button on-tap="offerSubmit">Send</button>
-        <button on-tap="deleteOffer">Delete</button>
+      <fieldset>
+        <label for="offerId">Id</label><input id="offerId" type="text" value="{{offer._id::input}}"></input><br>
+        <label for="description">About</label><input id="description" type="text" value="{{offer.description::input}}"></input><br>
+        <label for="price">price</label><input id="price" type="number" value="{{offer.price::input}}"></input><br>
+        <label for="expires">lasts until</label><input id="expires" type="date" value="{{offer.expires::input}}"></input><br>
+        <label for="latitude">LAT</label><input id="latitude" type="number" value="{{offer.latitude::input}}"></input><br>
+        <label for="longitude">LON</label><input id="longitude" type="number" value="{{offer.longitude::input}}"></input>
+      </fieldset>
+      <button on-tap="offerReset">New</button>
+      <button on-tap="offerSubmit">Send</button>
+      <button on-tap="deleteOffer">Delete</button>
     </template>
 </dom-module>
 <script>
