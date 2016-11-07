@@ -5,10 +5,43 @@
       <script src="bower_components/promise-polyfill/Promise.min.js"></script>
       <link rel="import" href="../bower_components/polymer/polymer.html">
       <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+      <link rel="import" href="../bower_components/leaflet-map/leaflet-map.html">
+      <link rel="import" href="yomoka_components/yo_offer_set.html">
+      <link rel="import" href="yomoka_components/yo_map.html">
       <link rel="import" href="yomoka_components/yo_offer.html">
       <title>Yomoka Polymer sandbox!</title>
     </head>
+    <script>
+      var featureController = {};
+      featureController.process = function(data, component) {
+        for(i=0; i<data.detail.response.length; i++) {
+          var marker = document.createElement('leaflet-marker');
+          var markerDescription = document.createTextNode(data.detail.response[i].description);
+          marker.setAttribute('latitude', data.detail.response[i].latitude);
+          marker.setAttribute('longitude', data.detail.response[i].longitude);
+          marker.appendChild(markerDescription);
+          component.appendChild(marker);
+        }
+      };
+      var layerController = {};
+      layerController.process = function(data, component) {
+        var jsondoc = document.createElement('leaflet-geojson');
+        jsondoc.data = data;
+        component.appendChild(jsondoc);
+      };
+    </script>
     <body>
-      <yo-offer></yo-offer>
+      <yo-offer-set></yo-offer-set>
+      <div>
+        <div style="float=left; position=absolute;">
+          <yo-offer offer='{"description":"firstentry"}'></yo-offer>
+        </div>
+        <div style="float=left; position=absolute;">
+          <yo-map controller="'"+JSON.stringify(featureController)+"'" height="200" width="400"></yo-map>
+        </div>
+        <div style="fload-right; position=relative;">
+          <yo-map controller="'"+JSON.stringify(layerController)+"'" height="200" width="400">/<yo-map>
+        </div>
+      </div>
     </body>
 </html>

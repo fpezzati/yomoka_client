@@ -1,16 +1,68 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<!--link rel="import" href="../bower_components/polymer/polymer.html"-->
 <dom-module id="yo-offer-set">
     <style>
-
+      :host {
+        display: block;
+      }
+      .yotable {
+        display: table;
+      }
+      .yorow {
+        display: table-row;
+        height: 25px;
+        background-color: #ecf2f9;
+        width: auto;
+      }
+      .yotableitem {
+        display: table-cell;
+        padding: 5px;
+      }
+      .yotableitem span {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     </style>
     <template>
-      <div class="table">
-        <div class="tablehead"></div>
-        <template repeat="{{offer in offerSet}}">
-          <div class="row">
-            JSON.stringify(offer);
+      <iron-ajax id="offerSetRead" handle-as="json" on-error="_offerError" on-response="_offerSetReadResp"></iron-ajax>
+      <div class="yotable">
+        <div class="yorow">
+          <div class="yotableitem" style="width:100px">
+            <span>Id</span>
+          </div>
+          <div class="yotableitem">
+            <span>Description</span>
+          </div>
+          <div class="yotableitem" style="width:240px">
+            <span>Lat</span>
+          </div>
+          <div class="yotableitem" style="width:240px">
+            <span>Lon</span>
+          </div>
+        </div>
+        <template is="dom-repeat" items="[[offerSet]]">
+          <div class="yorow">
+            <div class="yotableitem" style="width:100px">
+              <span>[[item._id]]</span>
+            </div>
+            <div class="yotableitem">
+              <span>[[item.description]]</span>
+            </div>
+            <div class="yotableitem" style="width:240px">
+              <span>[[item.latitude]]</span>
+            </div>
+            <div class="yotableitem" style="width:240px">
+              <span>[[item.longitude]]</span>
+            </div>
           </div>
         </template>
+      </div>
+      <div>
+        <button on-tap="offerSetLoad">Load</button>
+      </div>
+      <div>
+        [[errormsg]]
       </div>
     </template>
 </dom-module>
@@ -21,16 +73,21 @@
           offerSet: {
             type: Array,
             notify: true
+          },
+          errormsg: {
+            type: String,
+            value: ''
           }
         },
-        loadOfferSet: function() {
-
+        offerSetLoad: function() {
+          this.$.offerSetRead.url = '/srv/offer/all';
+          this.$.offerSetRead.generateRequest();
         },
-        submitOffer: function() {
-          alert("submit");
+        _offerSetReadResp: function(data) {
+          this.offerSet = data.detail.response;
         },
-        ready: function() {
-          loadOfferSet();
+        _offerError: function(data) {
+          this.errormsg = data;
         }
     });
 </script>

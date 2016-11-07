@@ -4,10 +4,9 @@ var app = express();
 app.use(bodyParser.json());
 
 var database = {};
-console.log("__dirname = "+__dirname);
 app.use(express.static(__dirname + '/public'));
 
-app.get('/srv/offer/read/all', function(req, res){
+app.get('/srv/offer/all', function(req, res){
   console.log("get offer set.");
   res.sendFile('./mock/offerset.js', {root: __dirname});
 });
@@ -19,8 +18,12 @@ app.get('/srv/offer/:id', function(req, res) {
     res.send('{"description": "NONE"}');
   }
 });
+app.get('/srv/map/layer/:id', function(req, res) {
+  console.log('read layer: ' + req.params.id + ' bound to path ' + './mock/layer' + req.params.id + '.js');
+  res.sendFile('./mock/layer' + req.params.id + '.js', {root: __dirname});
+});
 app.put('/srv/offer', function(req, res) {
-  console.log("create offer: "+req.body);
+  console.log("creating offer: "+JSON.stringify(req.body));
   var newOffer = req.body;
   newOffer._id = new Date().getMilliseconds();
   if(!(newOffer._id in database)) {
