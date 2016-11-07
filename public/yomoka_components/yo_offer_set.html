@@ -28,31 +28,31 @@
       <iron-ajax id="offerSetRead" handle-as="json" on-error="_offerError" on-response="_offerSetReadResp"></iron-ajax>
       <div class="yotable">
         <div class="yorow">
-          <div class="yotableitem" style="width:100px">
+          <div class="yotableitem" style="width:100px; max-width:100px">
             <span>Id</span>
           </div>
           <div class="yotableitem">
             <span>Description</span>
           </div>
-          <div class="yotableitem" style="width:240px">
+          <div class="yotableitem" style="width:240px; max-width:140px">
             <span>Lat</span>
           </div>
-          <div class="yotableitem" style="width:240px">
+          <div class="yotableitem" style="width:240px; max-width:140px">
             <span>Lon</span>
           </div>
         </div>
         <template is="dom-repeat" items="[[offerSet]]">
           <div class="yorow">
-            <div class="yotableitem" style="width:100px">
+            <div class="yotableitem" style="width:100px; max-width:100px">
               <span>[[item._id]]</span>
             </div>
             <div class="yotableitem">
               <span>[[item.description]]</span>
             </div>
-            <div class="yotableitem" style="width:240px">
+            <div class="yotableitem" style="width:140px; max-width:140px">
               <span>[[item.latitude]]</span>
             </div>
-            <div class="yotableitem" style="width:240px">
+            <div class="yotableitem" style="width:140px; max-width:140px">
               <span>[[item.longitude]]</span>
             </div>
           </div>
