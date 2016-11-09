@@ -6,6 +6,7 @@
       }
       .yotable {
         display: table;
+        table-layout: fixed;
       }
       .yorow {
         display: table-row;
@@ -16,9 +17,6 @@
       .yotableitem {
         display: table-cell;
         padding: 5px;
-      }
-      .yotableitem span {
-        display: block;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -28,33 +26,17 @@
       <iron-ajax id="offerSetRead" handle-as="json" on-error="_offerError" on-response="_offerSetReadResp"></iron-ajax>
       <div class="yotable">
         <div class="yorow">
-          <div class="yotableitem" style="width:100px">
-            <span>Id</span>
-          </div>
-          <div class="yotableitem">
-            <span>Description</span>
-          </div>
-          <div class="yotableitem" style="width:240px">
-            <span>Lat</span>
-          </div>
-          <div class="yotableitem" style="width:240px">
-            <span>Lon</span>
-          </div>
+          <div class="yotableitem" style="width:100px">Id</div>
+          <div class="yotableitem" style="min-width:300px">Description</div>
+          <div class="yotableitem" style="width:240px">Lat</div>
+          <div class="yotableitem" style="width:240px">Lon</div>
         </div>
         <template is="dom-repeat" items="[[offerSet]]">
           <div class="yorow">
-            <div class="yotableitem" style="width:100px">
-              <span>[[item._id]]</span>
-            </div>
-            <div class="yotableitem">
-              <span>[[item.description]]</span>
-            </div>
-            <div class="yotableitem" style="width:240px">
-              <span>[[item.latitude]]</span>
-            </div>
-            <div class="yotableitem" style="width:240px">
-              <span>[[item.longitude]]</span>
-            </div>
+            <div class="yotableitem">[[item._id]]</div>
+            <div class="yotableitem">[[item.description]]</div>
+            <div class="yotableitem">[[item.latitude]]</div>
+            <div class="yotableitem">[[item.longitude]]</div>
           </div>
         </template>
       </div>
