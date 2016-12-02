@@ -40,7 +40,7 @@
           </div>
         </div>
         <template is="dom-repeat" items="[[offerSet]]">
-          <div class="yorow">
+          <div class="yorow" on-tap="offerSelected">
             <div class="yotableitem" style="width:100px; max-width:100px">
               <span>[[item._id]]</span>
             </div>
@@ -76,6 +76,9 @@
             type: String,
             value: ''
           }
+        },
+        offerSelected: function(e) {
+          alert(JSON.stringify(e.model.item));
         },
         offerSetLoad: function() {
           this.$.offerSetRead.url = '/srv/offer/all';

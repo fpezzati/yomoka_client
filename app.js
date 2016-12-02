@@ -22,7 +22,7 @@ app.get('/srv/map/layer/:id', function(req, res) {
   console.log('read layer: ' + req.params.id + ' bound to path ' + './mock/layer' + req.params.id + '.js');
   res.sendFile('./mock/layer' + req.params.id + '.js', {root: __dirname});
 });
-app.put('/srv/offer', function(req, res) {
+app.post('/srv/offer', function(req, res) {
   console.log("creating offer: "+JSON.stringify(req.body));
   var newOffer = req.body;
   newOffer._id = new Date().getMilliseconds();
@@ -33,7 +33,7 @@ app.put('/srv/offer', function(req, res) {
     res.send('{"description": "OFFER EXISTS"}');
   }
 });
-app.post('/srv/offer', function(req, res) {
+app.put('/srv/offer', function(req, res) {
   console.log("update offer: "+req.body);
   if(req.body._id in database) {
       database[req.body._id] = req.body;
