@@ -2,9 +2,9 @@
     <style>
     </style>
     <template>
-      <iron-ajax id="offerCreate" method="PUT" handle-as="json" content-type="application/json" on-error="_offerError" on-response="_offerCreateResp"></iron-ajax>
+      <iron-ajax id="offerCreate" method="POST" handle-as="json" content-type="application/json" on-error="_offerError" on-response="_offerCreateResp"></iron-ajax>
       <iron-ajax id="offerRead" handle-as="json" on-error="_offerError" on-response="_offerReadResp"></iron-ajax>
-      <iron-ajax id="offerUpdate" method="POST" handle-as="json" on-error="_offerError" on-response="_offerUpdateResp"></iron-ajax>
+      <iron-ajax id="offerUpdate" method="PUT" handle-as="json" on-error="_offerError" on-response="_offerUpdateResp"></iron-ajax>
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerError" on-response="_offerDeleteResp"></iron-ajax>
       <fieldset>
         <label for="offerId">Id</label><input id="offerId" type="text" value="{{offer._id::input}}"></input><br>
