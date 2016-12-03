@@ -16,7 +16,8 @@
       </fieldset>
       <button on-tap="offerReset">New</button>
       <button on-tap="offerSubmit">Send</button>
-      <button on-tap="deleteOffer">Delete</button>
+      <button on-tap="offerDelete">Delete</button>
+      <div>[[errormsg]]</div>
     </template>
 </dom-module>
 <script>
@@ -27,10 +28,14 @@
             type: Object,
             notify: true,
             value: {}
+          },
+          errormsg: {
+            type: String,
+            value: ''
           }
         },
         offerReset: function() {
-          $this.offer = {};
+          this.offer = {};
         },
         offerSubmit: function() {
           if(this.offer._id === undefined || this.offer._id == "") {
@@ -72,7 +77,7 @@
           this.offer = data.detail.response;
         },
         _offerError: function(msg) {
-          alert(msg);
+          this.errormsg = msg.detail.error;
         }
     });
 </script>
