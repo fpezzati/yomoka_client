@@ -11,35 +11,9 @@
       <link rel="import" href="yomoka_components/yo_offer.html">
       <title>Yomoka Polymer sandbox!</title>
     </head>
-    <script>
-      var featureController = {};
-      featureController.process = function(data, component) {
-        for(i=0; i<data.detail.response.length; i++) {
-          var marker = document.createElement('leaflet-marker');
-          var markerDescription = document.createTextNode(data.detail.response[i].description);
-          marker.setAttribute('latitude', data.detail.response[i].latitude);
-          marker.setAttribute('longitude', data.detail.response[i].longitude);
-          marker.appendChild(markerDescription);
-          component.appendChild(marker);
-        }
-      };
-      var layerController = {};
-      layerController.process = function(data, component) {
-        var jsondoc = document.createElement('leaflet-geojson');
-        jsondoc.data = data;
-        component.appendChild(jsondoc);
-      };
-    </script>
     <body>
       <yo-offer-set></yo-offer-set>
       <yo-offer></yo-offer>
-      <div>
-        <div style="float=left; position=absolute;">
-          <yo-map controller="'"+JSON.stringify(featureController)+"'" height="200" width="400"></yo-map>
-        </div>
-        <div style="fload-right; position=relative;">
-          <yo-map controller="'"+JSON.stringify(layerController)+"'" height="200" width="400">/<yo-map>
-        </div>
-      </div>
+      <yo-map></yo-map>
     </body>
 </html>
