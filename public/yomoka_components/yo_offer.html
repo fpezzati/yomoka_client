@@ -51,7 +51,7 @@
         },
         _offerCreateResp: function(data) {
           this.offer = data.detail.response;
-          console.log(JSON.stringify(this.offer));
+          this.fire('createBook', this.offer);
         },
         offerRead: function(id) {
           this.$.offerRead.url = '/srv/offer' + '/' + this.offer._id;
@@ -67,6 +67,7 @@
         },
         _offerUpdateResp: function(data) {
           this.offer = data.detail.response;
+          this.fire('updateBook', this.offer);
         },
         offerDelete: function(id) {
           this.$.offerDelete.url = '/srv/offer' + '/' + this.offer._id;
@@ -75,6 +76,7 @@
         },
         _offerDeleteResp: function(data) {
           this.offer = data.detail.response;
+          this.fire('deleteBook', this.offer);
         },
         _offerError: function(msg) {
           this.errormsg = msg.detail.error;

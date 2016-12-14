@@ -15,5 +15,26 @@
       <yo-offer-set></yo-offer-set>
       <yo-offer></yo-offer>
       <yo-map></yo-map>
+      <script>
+        var yoOfferSet = document.querySelector('yo-offer-set');
+        var yoOffer = document.querySelector('yo-offer');
+        var yoMap = document.querySelector('yo-map');
+        yoOfferSet.addEventListener('createOffer', updateOfferSet);
+        yoOfferSet.addEventListener('updateOffer', updateOfferSet);
+        yoOfferSet.addEventListener('deleteOffer', updateOfferSet);
+        yoOffer.addEventListener('openOffer', openOffer);
+        yoMap.addEventListener('createOffer', updateMap);
+        yoMap.addEventListener('updateOffer', updateMap);
+        yoMap.addEventListener('deleteOffer', updateMap);
+        function updateOfferSet() {
+          yoOfferSet.offerSetLoad();
+        }
+        function openOffer(offerId) {
+          yoOffer.offerRead(offerId);
+        }
+        function updateMap() {
+          yoMap.offerSetLoad();
+        }
+      </script>
     </body>
 </html>
