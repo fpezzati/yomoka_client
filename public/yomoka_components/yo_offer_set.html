@@ -78,8 +78,7 @@
           }
         },
         offerSelected: function(e) {
-          alert(JSON.stringify(e.model.item));
-          this.fire('openOffer', e.model.item.id);
+          this.fire('openOffer', e.model.item._id);
         },
         offerSetLoad: function() {
           this.$.offerSetRead.url = '/srv/offer/all';

@@ -4,7 +4,7 @@
     <template>
       <iron-ajax id="offerCreate" method="POST" handle-as="json" content-type="application/json" on-error="_offerError" on-response="_offerCreateResp"></iron-ajax>
       <iron-ajax id="offerRead" handle-as="json" on-error="_offerError" on-response="_offerReadResp"></iron-ajax>
-      <iron-ajax id="offerUpdate" method="PUT" handle-as="json" on-error="_offerError" on-response="_offerUpdateResp"></iron-ajax>
+      <iron-ajax id="offerUpdate" method="PUT" handle-as="json" content-type="application/json" on-error="_offerError" on-response="_offerUpdateResp"></iron-ajax>
       <iron-ajax id="offerDelete" method="DELETE" handle-as="json" on-error="_offerError" on-response="_offerDeleteResp"></iron-ajax>
       <fieldset>
         <label for="offerId">Id</label><input id="offerId" type="text" value="{{offer._id::input}}"></input><br>
@@ -51,10 +51,10 @@
         },
         _offerCreateResp: function(data) {
           this.offer = data.detail.response;
-          this.fire('createBook', this.offer);
+          this.fire('refreshOfferSet', this.offer);
         },
         offerRead: function(id) {
-          this.$.offerRead.url = '/srv/offer' + '/' + this.offer._id;
+          this.$.offerRead.url = '/srv/offer' + '/' + id;
           this.$.offerRead.generateRequest();
         },
         _offerReadResp: function(data) {
@@ -67,7 +67,7 @@
         },
         _offerUpdateResp: function(data) {
           this.offer = data.detail.response;
-          this.fire('updateBook', this.offer);
+          this.fire('refreshOfferSet', this.offer);
         },
         offerDelete: function(id) {
           this.$.offerDelete.url = '/srv/offer' + '/' + this.offer._id;
@@ -76,7 +76,7 @@
         },
         _offerDeleteResp: function(data) {
           this.offer = data.detail.response;
-          this.fire('deleteBook', this.offer);
+          this.fire('refreshOfferSet', this.offer);
         },
         _offerError: function(msg) {
           this.errormsg = msg.detail.error;

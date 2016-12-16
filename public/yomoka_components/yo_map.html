@@ -2,7 +2,6 @@
   <style>
   </style>
   <template>
-    Here is the map.
     <iron-ajax id="mapRead" handle-as="json" on-error="_mapError" on-response="_mapRead"></iron-ajax>
     <leaflet-map id="lmap" style="height:500px; width:500px" fit-to-markers>
       <template is="dom-repeat" items="[[offerSet]]">

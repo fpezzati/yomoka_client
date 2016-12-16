@@ -19,13 +19,7 @@
         var yoOfferSet = document.querySelector('yo-offer-set');
         var yoOffer = document.querySelector('yo-offer');
         var yoMap = document.querySelector('yo-map');
-        yoOfferSet.addEventListener('createOffer', updateOfferSet);
-        yoOfferSet.addEventListener('updateOffer', updateOfferSet);
-        yoOfferSet.addEventListener('deleteOffer', updateOfferSet);
-        yoOffer.addEventListener('openOffer', openOffer);
-        yoMap.addEventListener('createOffer', updateMap);
-        yoMap.addEventListener('updateOffer', updateMap);
-        yoMap.addEventListener('deleteOffer', updateMap);
+
         function updateOfferSet() {
           yoOfferSet.offerSetLoad();
         }
@@ -35,6 +29,17 @@
         function updateMap() {
           yoMap.offerSetLoad();
         }
+        yoOfferSet.addEventListener('refreshOfferSet', updateOfferSet);
+        yoOffer.addEventListener('openOffer', openOffer);
+        yoMap.addEventListener('refreshOfferSet', updateMap);
+
+        addEventListener('refreshOfferSet', function (e) {
+          yoOfferSet.offerSetLoad();
+          yoMap.offerSetLoad();
+        });
+        addEventListener('openOffer', function (e) {
+          yoOffer.offerRead(e.detail);
+        });
       </script>
     </body>
 </html>

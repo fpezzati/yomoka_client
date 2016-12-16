@@ -36,9 +36,10 @@ app.post('/srv/offer', function(req, res) {
   }
 });
 app.put('/srv/offer', function(req, res) {
-  console.log("update offer: "+req.body);
+  console.log("update offer: "+JSON.stringify(req.body));
   if(req.body._id in database) {
-      database[req.body._id] = JSON.stringify(req.body);
+      database[req.body._id] = req.body;
+      res.send(JSON.stringify(req.body));
   } else {
     res.send('{"description": "NONE"}');
   }
